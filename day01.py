@@ -13,7 +13,7 @@ def part_1(filename):
     print(f"Part 1: {filename}")
     with open(filename) as file:
         ds = [int(line) for line in file]
-        print(len([1 for a, b in zip(ds, ds[1:]) if b > a]))
+        print(sum(b > a for a, b in zip(ds, ds[1:])))
         
 
 def part_2(filename):
@@ -21,7 +21,7 @@ def part_2(filename):
     with open(filename) as file:
         ds = [int(line) for line in file]
         triples = [sum(v) for v in zip(ds, ds[1:], ds[2:])]
-        print(len([1 for a, b in zip(triples, triples[1:]) if b > a]))
+        print(sum(b > a for a, b in zip(triples, triples[1:])))
 
 if __name__ == "__main__":
     part_1(testing_file_name)
