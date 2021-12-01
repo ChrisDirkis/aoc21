@@ -20,7 +20,7 @@ def part_2(filename):
     print(f"Part 2: {filename}")
     with open(filename) as file:
         ds = [int(line) for line in file]
-        triples = [a + b + c for a, b, c in zip(ds, ds[1:], ds[2:])]
+        triples = [sum(v) for v in zip(ds, ds[1:], ds[2:])]
         print(len([1 for a, b in zip(triples, triples[1:]) if b > a]))
 
 if __name__ == "__main__":
