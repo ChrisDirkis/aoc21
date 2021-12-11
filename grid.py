@@ -27,6 +27,34 @@ def dot_t(a, b):
 def in_grid(addr, dims):
     return all(v >= 0 and v < dims[i] for i, v in enumerate(addr))
 
+def all_addrs(dims):
+    return product(*(list(range(v) for i, v in enumerate(dims))))
+
+def index_into(grid, addr):
+    arr = grid
+    for v in reversed(addr):
+        arr = arr[v]
+    return arr
+
+def find_addrs_v(grid, dims, value):
+    return (addr for addr in all_addrs(dims) if index_into(grid, addr) == value)
+
+def find_addrs_l(grid, dims, func):
+    return (addr for addr in all_addrs(dims) if func(index_into(grid, addr)))
+
+def gen_grid(dims):
+    if len(dims) == 1:
+        return [0] * dims[0]
+    super_dims = tuple(dims[1:])
+    return [gen_grid(super_dims) for _ in range(dims[0])]
+
+def iter_grid(grid):
+    if not isinstance(grid, list):
+        return [grid]
+    if not isinstance(grid[0], list):
+        return grid
+    return chain(*(iter_grid(subgrid) for subgrid in grid))
+
 def adj(addr, dims):
     n = len(addr)
     offsets = chain(permutations([1] + [0] * (n - 1)), permutations([-1] + [0] * (n - 1)))
@@ -38,8 +66,8 @@ def adj_diag(addr, dims):
     adjs = (add_t(addr, offset) for offset in offsets)
     return (adj for adj in adjs if in_grid(addr, dims))
 
-def length(addr):
+def len_euclid(addr):
     return sqrt(sum(v**2 for v in addr))
 
-def length_taxi(addr):
+def len_taxi(addr):
     return sum(abs(v) for v in addr)
