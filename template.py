@@ -4,19 +4,24 @@ from math import *
 import re
 from collections import defaultdict 
 
-from typing import *
+from grid import *
 
-data_file_name = "inputs/dayX"
+digit_re = re.compile(r"(\d+)")
+
+aod_day = str(int(__file__.split("/")[-1][3:4]))
+data_file_name = "inputs/day" + aod_day
 testing_file_name = data_file_name + "_test"
 
 def part_1(filename):
     print(f"Part 1: {filename}")
     with open(filename) as file:
+        lines = [digit_re.findall(line) for line in file]
         pass
 
 def part_2(filename):
     print(f"Part 2: {filename}")
     with open(filename) as file:
+        lines = [digit_re.findall(line) for line in file]
         pass
 
 if __name__ == "__main__":
