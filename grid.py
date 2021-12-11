@@ -28,7 +28,7 @@ def in_grid(addr, dims):
     return all(v >= 0 and v < dims[i] for i, v in enumerate(addr))
 
 def all_addrs(dims):
-    return product(*(list(range(v) for i, v in enumerate(dims))))
+    return (to_vec(v) for v in product(*(list(range(v) for v in dims))))
 
 def index_into(grid, addr):
     arr = grid
