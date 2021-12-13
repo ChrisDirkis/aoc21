@@ -8,7 +8,7 @@ from grid import *
 
 digit_re = re.compile(r"(\d+)")
 
-aod_day = str(int(__file__.split("/")[-1][3:4]))
+aod_day = str(int(__file__.split("/")[-1][3:5]))
 data_file_name = "inputs/day" + aod_day
 testing_file_name = data_file_name + "_test"
 
